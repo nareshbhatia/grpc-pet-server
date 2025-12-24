@@ -4,18 +4,16 @@ managed:
   enabled: true
 
 plugins:
-  # Generate base types for TypeScript (message and enum types)
+  # Generate TypeScript code
+  # The underlying local plugin is @bufbuild/protoc-gen-es
+  # See https://github.com/bufbuild/protobuf-es/blob/main/MANUAL.md
   - remote: buf.build/bufbuild/es:v2.10.2
     out: gen/ts
+    # Generate any imported dependencies
+    include_imports: true
     opt:
       - target=ts
       - import_extension=.js
   
-  # Generate Connect RPC service stubs for TypeScript
-  - remote: buf.build/connectrpc/es:v1.6.1
-    out: gen/ts
-    opt:
-      - target=ts
-
 inputs:
   - directory: proto

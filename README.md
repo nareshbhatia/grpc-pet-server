@@ -1,6 +1,6 @@
 # gRPC Pet Server
 
-A simple Go server to demonstrate gRPC concepts
+A simple Go server to demonstrate gRPC concepts. A React frontend that consumes this API is available [here](https://github.com/nareshbhatia/grpc-pet-ui).
 
 ## Development
 

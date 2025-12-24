@@ -19,14 +19,37 @@ import (
 
 const address = "localhost:8080"
 
+// corsMiddleware adds CORS headers to allow requests from http://localhost:3000
+func corsMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// Set CORS headers
+		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Connect-Protocol-Version, Connect-Timeout, Connect-Content-Encoding")
+		w.Header().Set("Access-Control-Allow-Credentials", "true")
+		w.Header().Set("Access-Control-Max-Age", "86400")
+
+		// Handle preflight requests
+		if r.Method == "OPTIONS" {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	})
+}
+
 func main() {
 	mux := http.NewServeMux()
 	path, handler := petConnect.NewPetServiceHandler(&petServiceHandler{})
 	mux.Handle(path, handler)
 
+	// Wrap the mux with CORS middleware
+	corsHandler := corsMiddleware(mux)
+
 	server := &http.Server{
 		Addr:    address,
-		Handler: h2c.NewHandler(mux, &http2.Server{}),
+		Handler: h2c.NewHandler(corsHandler, &http2.Server{}),
 	}
 
 	// Start server in a goroutine

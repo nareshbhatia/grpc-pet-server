@@ -6,10 +6,6 @@
   "files": [
     "gen/ts/**/*"
   ],
-  "scripts": {
-    "generate": "buf generate --template buf.gen.ts.yaml",
-    "lint": "buf lint"
-  },
   "author": "Naresh Bhatia",
   "license": "MIT",
   "repository": {
@@ -20,13 +16,9 @@
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
-  "peerDependencies": {
-    "@bufbuild/protobuf": "^2.10.1",
-    "@connectrpc/connect": "^2.1.0"
-  },
-  "devDependencies": {
+  "dependencies": {
     "@bufbuild/protobuf": "^2.10.2",
-    "@bufbuild/protoc-gen-es": "^2.10.2",
-    "@connectrpc/connect": "^2.1.1"
+    "@connectrpc/connect": "^2.1.1",
+    "@connectrpc/connect-web": "^2.1.1"
   }
 }
