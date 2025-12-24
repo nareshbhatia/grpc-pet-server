@@ -1,0 +1,32 @@
+{
+  "name": "@nareshbhatia/grpc-pet-server",
+  "version": "0.0.1",
+  "description": "A simple Go server to demonstrate gRPC concepts",
+  "type": "module",
+  "files": [
+    "gen/ts/**/*"
+  ],
+  "scripts": {
+    "generate": "buf generate --template buf.gen.ts.yaml",
+    "lint": "buf lint"
+  },
+  "author": "Naresh Bhatia",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nareshbhatia/grpc-pet-server.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@bufbuild/protobuf": "^2.10.1",
+    "@connectrpc/connect": "^2.1.0"
+  },
+  "devDependencies": {
+    "@bufbuild/protobuf": "^2.10.2",
+    "@bufbuild/protoc-gen-es": "^2.10.2",
+    "@connectrpc/connect": "^2.1.1"
+  }
+}

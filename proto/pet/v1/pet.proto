@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package pet.v1;
+
+enum PetStatus {
+  PET_STATUS_UNSPECIFIED = 0;
+  PET_STATUS_SLEEPING = 1;
+  PET_STATUS_EATING = 2;
+  PET_STATUS_DRINKING = 3;
+  PET_STATUS_CHEWING = 4;
+  PET_STATUS_PLAYING = 5;
+  PET_STATUS_RUNNING = 6;
+  PET_STATUS_TRAINING = 7;
+  PET_STATUS_BARKING = 8;
+  PET_STATUS_CUDDLING = 9;
+  PET_STATUS_LICKING = 10;
+}
+
+service PetService {
+  rpc GetStatus(GetStatusRequest) returns (GetStatusResponse);
+  rpc SubscribeHeartbeat(SubscribeHeartbeatRequest) returns (stream SubscribeHeartbeatResponse);
+}
+
+message GetStatusRequest {
+}
+
+message GetStatusResponse {
+  PetStatus status = 1;
+}
+
+message SubscribeHeartbeatRequest {
+}
+
+message SubscribeHeartbeatResponse {
+  // Timestamp when this heartbeat was captured (milliseconds since Unix epoch)
+  int64 timestamp_ms = 1;
+}
