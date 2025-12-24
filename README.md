@@ -27,3 +27,40 @@ buf generate --template buf.gen.go.yaml
 ```bash
 buf generate --template buf.gen.ts.yaml
 ```
+
+### Starting the server
+
+```bash
+go mod tidy
+go run server/main.go
+```
+
+### Calling GetStatus
+
+```bash
+buf curl \
+--schema . \
+http://localhost:8080/pet.v1.PetService/GetStatus
+
+# Random response:
+# {
+#   "status": "PET_STATUS_TRAINING"
+# }
+```
+
+### Calling SubscribeHeartbeat
+
+```bash
+buf curl \
+--schema . \
+http://localhost:8080/pet.v1.PetService/SubscribeHeartbeat
+
+# Response:
+# {
+#   "timestampMs": "1766547064733"
+# }
+# {
+#   "timestampMs": "1766547065733"
+# }
+# ...
+```
